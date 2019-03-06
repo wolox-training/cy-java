@@ -9,6 +9,9 @@ import javax.persistence.Id;
 @Entity
 public class Book {
 
+    public Book() {
+    }
+
     public Book(String genre, String author, String image, String title, String subtitle,
         String publisher, String year, int pages, String isbn) {
         this.genre = genre;
