@@ -73,7 +73,7 @@ public class User {
     }
 
     public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = LocalDate.of(birthdate.getYear(), birthdate.getMonth(), birthdate.getDayOfMonth());
+        this.birthdate = birthdate;
     }
 
     public List<Book> getBooks() {

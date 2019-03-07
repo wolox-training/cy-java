@@ -1,6 +1,7 @@
 package wolox.training.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -145,7 +146,7 @@ public class Book {
     }
 
     public List<User> getUsers() {
-        return users;
+        return (List<User>) Collections.unmodifiableCollection(users);
     }
 
     public void setUsers(List<User> users) {
