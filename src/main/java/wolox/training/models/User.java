@@ -1,5 +1,6 @@
 package wolox.training.models;
 
+import com.google.common.base.Preconditions;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import wolox.training.exceptions.BookAlreadyOwnedException;
 import wolox.training.exceptions.BookNotFoundException;
+
 
 @Entity
 public class User {
@@ -57,7 +59,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = Preconditions.checkNotNull(username, "The username can't be null");
     }
 
     public String getName() {
@@ -65,7 +67,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = Preconditions.checkNotNull(name, "The name can't be null");
     }
 
     public LocalDate getBirthdate() {
@@ -73,7 +75,8 @@ public class User {
     }
 
     public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+
+        this.birthdate = Preconditions.checkNotNull(birthdate, "The birthdate can't be null");
     }
 
     public List<Book> getBooks() {
@@ -81,6 +84,8 @@ public class User {
     }
 
     public void setBooks(List<Book> books) {
+        Preconditions.checkArgument(books != null && !books.isEmpty(),
+            "The books cant be null or empty");
         this.books = books;
     }
 

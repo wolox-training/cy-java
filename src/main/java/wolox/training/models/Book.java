@@ -1,5 +1,6 @@
 package wolox.training.models;
 
+import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -86,7 +87,7 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.author = Preconditions.checkNotNull(author, "The author can't be null");
     }
 
     public String getImage() {
@@ -94,7 +95,7 @@ public class Book {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image = Preconditions.checkNotNull(image, "The image can't be null");
     }
 
     public String getTitle() {
@@ -102,7 +103,7 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = Preconditions.checkNotNull(title, "The title can't be null");
     }
 
     public String getSubtitle() {
@@ -110,7 +111,7 @@ public class Book {
     }
 
     public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+        this.subtitle = Preconditions.checkNotNull(subtitle, "The subtitle can't be null");
     }
 
     public String getPublisher() {
@@ -118,7 +119,7 @@ public class Book {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = publisher;
+        this.publisher = Preconditions.checkNotNull(publisher, "The publisher can't be null");
     }
 
     public String getYear() {
@@ -126,7 +127,7 @@ public class Book {
     }
 
     public void setYear(String year) {
-        this.year = year;
+        this.year = Preconditions.checkNotNull(year, "The year can't be null");
     }
 
     public int getPages() {
@@ -134,7 +135,7 @@ public class Book {
     }
 
     public void setPages(int pages) {
-        this.pages = pages;
+        this.pages = Preconditions.checkNotNull(pages, "The pages can't be null");
     }
 
     public String getIsbn() {
@@ -142,7 +143,7 @@ public class Book {
     }
 
     public void setIsbn(String isbn) {
-        this.isbn = isbn;
+        this.isbn = Preconditions.checkNotNull(isbn, "The isbn can't be null");
     }
 
     public List<User> getUsers() {
@@ -150,6 +151,8 @@ public class Book {
     }
 
     public void setUsers(List<User> users) {
+        Preconditions.checkArgument(users != null && !users.isEmpty(),
+            "The users cant be null or empty");
         this.users = users;
     }
 }
