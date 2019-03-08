@@ -69,11 +69,11 @@ public class UserController {
 
     @PostMapping("/{userId}/addBook/{bookId}")
     public void addBookToUser(@PathVariable Long userId, @PathVariable Long bookId) {
-        Book book = bookRepository.findById(bookId)
+        Book bookAdd = bookRepository.findById(bookId)
             .orElseThrow(() -> new BookNotFoundException("Book ot found"));
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException("User not found"));
-        user.addBookToUser(book);
+        user.addBookToUser(bookAdd);
     }
 
     @PostMapping("{userId}/deleteBook/{bookId}")

@@ -3,9 +3,8 @@ package wolox.training.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,11 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import wolox.training.exceptions.BookAlreadyOwnedException;
 import wolox.training.exceptions.BookNotFoundException;
 
 
 @Entity
+@Table(name = "users")
 public class User {
 
     public User() {
@@ -32,6 +33,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     private long id;
 
     @Column(nullable = false)
@@ -45,7 +47,7 @@ public class User {
 
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnore
-    private Collection<Book> books = new HashSet<>();
+    private List<Book> books = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -84,8 +86,8 @@ public class User {
         this.birthdate = Preconditions.checkNotNull(birthdate, "The birthdate can't be null");
     }
 
-    public Collection<Book> getBooks() {
-        return Collections.unmodifiableCollection(books);
+    public List<Book> getBooks() {
+        return (List<Book>) Collections.unmodifiableCollection(books);
     }
 
     public void setBooks(List<Book> books) {
