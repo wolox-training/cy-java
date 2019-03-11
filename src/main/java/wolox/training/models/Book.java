@@ -21,30 +21,15 @@ public class Book {
 
     public Book(String genre, String author, String image, String title, String subtitle,
         String publisher, String year, int pages, String isbn) {
-        this.genre = genre;
-        this.author = author;
-        this.image = image;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.publisher = publisher;
-        this.year = year;
-        this.pages = pages;
-        this.isbn = isbn;
-    }
-
-    public Book(String genre, String author, String image, String title, String subtitle,
-        String publisher, String year, int pages, String isbn,
-        Collection<User> users) {
-        this.genre = genre;
-        this.author = author;
-        this.image = image;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.publisher = publisher;
-        this.year = year;
-        this.pages = pages;
-        this.isbn = isbn;
-        this.users = users;
+        setGenre(genre);
+        setAuthor(author);
+        setImage(image);
+        setTitle(title);
+        setSubtitle(subtitle);
+        setPublisher(publisher);
+        setYear(year);
+        setPages(pages);
+        setIsbn(isbn);
     }
 
     @Id

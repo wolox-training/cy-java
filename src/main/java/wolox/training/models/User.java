@@ -25,17 +25,9 @@ public class User {
     }
 
     public User(String username, String name, LocalDate birthdate) {
-        this.username = username;
-        this.name = name;
-        this.birthdate = birthdate;
-    }
-
-    public User(String username, String name, LocalDate birthdate,
-        Collection<Book> books) {
-        this.username = username;
-        this.name = name;
-        this.birthdate = birthdate;
-        this.books = books;
+        setUsername(username);
+        setName(name);
+        setBirthdate(birthdate);
     }
 
     @Id
