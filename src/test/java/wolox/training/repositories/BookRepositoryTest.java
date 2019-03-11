@@ -179,4 +179,12 @@ public class BookRepositoryTest {
         entityManager.persistAndFlush(book);
         Book bookTest = bookRepository.findById(100L).get();
     }
+
+    @Test
+    public void notCreateTest() {
+        Book book = new Book();
+        bookRepository.save(book);
+        Book bookTest = bookRepository.findById(book.getId()).get();
+        assertThat(bookTest.getAuthor()).isNull();
+    }
 }

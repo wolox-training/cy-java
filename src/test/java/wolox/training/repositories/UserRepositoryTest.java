@@ -57,7 +57,7 @@ public class UserRepositoryTest {
         }
 
         List<User> usersTest = userRepository.findAll();
-        assertThat(usersTest.size()).isEqualTo(2);
+        assertThat(usersTest.size()).isEqualTo(3);
     }
 
     @Test
@@ -100,6 +100,14 @@ public class UserRepositoryTest {
         user.setBirthdate(LocalDate.now());
         entityManager.persistAndFlush(user);
         User userTest = userRepository.findById(100L).get();
+    }
+
+    @Test
+    public void notCreateTest() {
+        User user = new User();
+        userRepository.save(user);
+        User userTest = userRepository.findById(user.getId()).get();
+        assertThat(userTest.getUsername()).isNull();
     }
 
 }
