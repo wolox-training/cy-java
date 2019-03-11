@@ -59,7 +59,9 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = Preconditions.checkNotNull(username, "The username can't be null");
+        Preconditions.checkArgument(username != null && !username.isEmpty(),
+            "The username can't be null or empty");
+        this.username = username;
     }
 
     public String getName() {
@@ -67,7 +69,9 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = Preconditions.checkNotNull(name, "The name can't be null");
+        Preconditions.checkArgument(name != null && !name.isEmpty(),
+            "The name can't be null or empty");
+        this.name = name;
     }
 
     public LocalDate getBirthdate() {
@@ -84,9 +88,7 @@ public class User {
     }
 
     public void setBooks(List<Book> books) {
-        Preconditions.checkArgument(books != null && !books.isEmpty(),
-            "The books cant be null or empty");
-        this.books = books;
+        this.books = Preconditions.checkNotNull(books, "The books can't be null");
     }
 
     public boolean addBookToUser(Book newBook) {

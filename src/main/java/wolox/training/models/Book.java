@@ -87,7 +87,9 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        this.author = Preconditions.checkNotNull(author, "The author can't be null");
+        Preconditions.checkArgument(author != null && !author.isEmpty(),
+            "The author can't be null or empty");
+        this.author = author;
     }
 
     public String getImage() {
@@ -95,7 +97,9 @@ public class Book {
     }
 
     public void setImage(String image) {
-        this.image = Preconditions.checkNotNull(image, "The image can't be null");
+        Preconditions.checkArgument(image != null && !image.isEmpty(),
+            "The image can't be null or empty");
+        this.image = image;
     }
 
     public String getTitle() {
@@ -103,7 +107,9 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        this.title = Preconditions.checkNotNull(title, "The title can't be null");
+        Preconditions.checkArgument(title != null && !title.isEmpty(),
+            "The title can't be null or empty");
+        this.title = title;
     }
 
     public String getSubtitle() {
@@ -111,7 +117,9 @@ public class Book {
     }
 
     public void setSubtitle(String subtitle) {
-        this.subtitle = Preconditions.checkNotNull(subtitle, "The subtitle can't be null");
+        Preconditions.checkArgument(subtitle != null && !subtitle.isEmpty(),
+            "The subtitle can't be null or empty");
+        this.subtitle = subtitle;
     }
 
     public String getPublisher() {
@@ -119,7 +127,9 @@ public class Book {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = Preconditions.checkNotNull(publisher, "The publisher can't be null");
+        Preconditions.checkArgument(publisher != null && !publisher.isEmpty(),
+            "The publisher can't be null or empty");
+        this.publisher = publisher;
     }
 
     public String getYear() {
@@ -127,15 +137,19 @@ public class Book {
     }
 
     public void setYear(String year) {
-        this.year = Preconditions.checkNotNull(year, "The year can't be null");
+        Preconditions.checkArgument(year != null && !year.isEmpty(),
+            "The year can't be null or empty");
+        this.year = year;
     }
 
     public int getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
-        this.pages = Preconditions.checkNotNull(pages, "The pages can't be null");
+    public void setPages(Integer pages) {
+        Preconditions.checkArgument(pages != null && pages > 0,
+            "The pages can't be null or less than 0");
+        this.pages = pages;
     }
 
     public String getIsbn() {
@@ -143,7 +157,9 @@ public class Book {
     }
 
     public void setIsbn(String isbn) {
-        this.isbn = Preconditions.checkNotNull(isbn, "The isbn can't be null");
+        Preconditions.checkArgument(isbn != null && !isbn.isEmpty(),
+            "The isbn can't be null or empty");
+        this.isbn = isbn;
     }
 
     public List<User> getUsers() {
@@ -151,8 +167,6 @@ public class Book {
     }
 
     public void setUsers(List<User> users) {
-        Preconditions.checkArgument(users != null && !users.isEmpty(),
-            "The users cant be null or empty");
-        this.users = users;
+        this.users = Preconditions.checkNotNull(users, "The users can't be null");
     }
 }
