@@ -1,8 +1,10 @@
 package wolox.training.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,18 +20,16 @@ public class Book {
     }
 
     public Book(String genre, String author, String image, String title, String subtitle,
-        String publisher, String year, int pages, String isbn,
-        List<User> users) {
-        this.genre = genre;
-        this.author = author;
-        this.image = image;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.publisher = publisher;
-        this.year = year;
-        this.pages = pages;
-        this.isbn = isbn;
-        this.users = users;
+        String publisher, String year, int pages, String isbn) {
+        setGenre(genre);
+        setAuthor(author);
+        setImage(image);
+        setTitle(title);
+        setSubtitle(subtitle);
+        setPublisher(publisher);
+        setYear(year);
+        setPages(pages);
+        setIsbn(isbn);
     }
 
     @Id
@@ -64,7 +64,8 @@ public class Book {
     private String isbn;
 
     @ManyToMany(mappedBy = "books")
-    private List<User> users = new ArrayList<>();
+    @JsonIgnore
+    private Collection<User> users = new HashSet<>();
 
     public long getId() {
         return id;
@@ -162,8 +163,8 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public List<User> getUsers() {
-        return (List<User>) Collections.unmodifiableCollection(users);
+    public Collection<User> getUsers() {
+        return Collections.unmodifiableCollection(users);
     }
 
     public void setUsers(List<User> users) {

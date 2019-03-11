@@ -1,9 +1,11 @@
 package wolox.training.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,12 +24,10 @@ public class User {
     public User() {
     }
 
-    public User(String username, String name, LocalDate birthdate,
-        List<Book> books) {
-        this.username = username;
-        this.name = name;
-        this.birthdate = birthdate;
-        this.books = books;
+    public User(String username, String name, LocalDate birthdate) {
+        setUsername(username);
+        setName(name);
+        setBirthdate(birthdate);
     }
 
     @Id
@@ -44,7 +44,8 @@ public class User {
     private LocalDate birthdate;
 
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Book> books = new ArrayList<>();
+    @JsonIgnore
+    private Collection<Book> books = new HashSet<>();
 
     public long getId() {
         return id;
@@ -83,8 +84,8 @@ public class User {
         this.birthdate = Preconditions.checkNotNull(birthdate, "The birthdate can't be null");
     }
 
-    public List<Book> getBooks() {
-        return (List<Book>) Collections.unmodifiableCollection(books);
+    public Collection<Book> getBooks() {
+        return Collections.unmodifiableCollection(books);
     }
 
     public void setBooks(List<Book> books) {
