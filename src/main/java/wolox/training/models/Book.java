@@ -1,5 +1,6 @@
 package wolox.training.models;
 
+import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -86,6 +87,8 @@ public class Book {
     }
 
     public void setAuthor(String author) {
+        Preconditions.checkArgument(author != null && !author.isEmpty(),
+            "The author can't be null or empty");
         this.author = author;
     }
 
@@ -94,6 +97,8 @@ public class Book {
     }
 
     public void setImage(String image) {
+        Preconditions.checkArgument(image != null && !image.isEmpty(),
+            "The image can't be null or empty");
         this.image = image;
     }
 
@@ -102,6 +107,8 @@ public class Book {
     }
 
     public void setTitle(String title) {
+        Preconditions.checkArgument(title != null && !title.isEmpty(),
+            "The title can't be null or empty");
         this.title = title;
     }
 
@@ -110,6 +117,8 @@ public class Book {
     }
 
     public void setSubtitle(String subtitle) {
+        Preconditions.checkArgument(subtitle != null && !subtitle.isEmpty(),
+            "The subtitle can't be null or empty");
         this.subtitle = subtitle;
     }
 
@@ -118,6 +127,8 @@ public class Book {
     }
 
     public void setPublisher(String publisher) {
+        Preconditions.checkArgument(publisher != null && !publisher.isEmpty(),
+            "The publisher can't be null or empty");
         this.publisher = publisher;
     }
 
@@ -126,6 +137,8 @@ public class Book {
     }
 
     public void setYear(String year) {
+        Preconditions.checkArgument(year != null && !year.isEmpty(),
+            "The year can't be null or empty");
         this.year = year;
     }
 
@@ -133,7 +146,9 @@ public class Book {
         return pages;
     }
 
-    public void setPages(int pages) {
+    public void setPages(Integer pages) {
+        Preconditions.checkArgument(pages != null && pages > 0,
+            "The pages can't be null or less than 0");
         this.pages = pages;
     }
 
@@ -142,6 +157,8 @@ public class Book {
     }
 
     public void setIsbn(String isbn) {
+        Preconditions.checkArgument(isbn != null && !isbn.isEmpty(),
+            "The isbn can't be null or empty");
         this.isbn = isbn;
     }
 
@@ -150,6 +167,6 @@ public class Book {
     }
 
     public void setUsers(List<User> users) {
-        this.users = users;
+        this.users = Preconditions.checkNotNull(users, "The users can't be null");
     }
 }
