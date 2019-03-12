@@ -1,5 +1,6 @@
 package wolox.training.controllers;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,6 +87,17 @@ public class BookController {
             bookRepository.save(requestedBook);
         }
         return new ResponseEntity<>(requestedBook, HttpStatus.OK);
+    }
+
+    @GetMapping("/matcheencomplex")
+    public List<Book> findByPublisherAndGenreAndYear(
+        @RequestParam("publisher") String publisher,
+        @RequestParam("genre") String genre,
+        @RequestParam("year") String year) {
+
+        List<Book> books = bookRepository.findByPublisherAndGenreAndYear(publisher, genre, year);
+
+        return books;
     }
 
 }
