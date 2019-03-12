@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import wolox.training.exceptions.BookAlreadyOwnedException;
 import wolox.training.exceptions.BookNotFoundException;
 
@@ -48,6 +49,11 @@ public class User {
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnore
     private List<Book> books = new ArrayList<>();
+
+    @Column(nullable = false)
+    private String password;
+
+    private String role = "USER";
 
     public long getId() {
         return id;
@@ -94,6 +100,22 @@ public class User {
         this.books = Preconditions.checkNotNull(books, "The books can't be null");
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = new BCryptPasswordEncoder().encode(password);
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public boolean addBookToUser(Book newBook) {
         Boolean book = books.stream().anyMatch(b -> b.equals(newBook));
         if (book) {
@@ -110,5 +132,9 @@ public class User {
         }else {
             throw new BookNotFoundException("Book not found");
         }
+    }
+
+    public boolean validatePassword(String password) {
+        return new BCryptPasswordEncoder().matches(password, this.password);
     }
 }
