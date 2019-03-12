@@ -10,8 +10,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
     @Query(
-        "SELECT u FROM User u WHERE ((u.birthdate > ?1 AND u.birthdate < ?2) OR u.birthdate IS NULL) "
-            + "AND (u.username = ?3 OR u.username IS NULL)")
+        "SELECT u FROM User u WHERE ((u.birthdate > :startDate AND u.birthdate < :endDate) OR u.birthdate IS NULL) "
+            + "AND (u.username = :username OR u.username IS NULL)")
     List<User> findByBirthdateBetweenAndUsernameContainingIgnoreCase(LocalDate startDate,
         LocalDate endDate, String username);
 }
