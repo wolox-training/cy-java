@@ -102,12 +102,13 @@ public class UserRepositoryTest {
         User userTest = userRepository.findById(100L).get();
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void notCreateTest() {
         User user = new User();
+        user.setUsername("Cristian Test");
+        user.setName(null);
+        user.setBirthdate(null);
         userRepository.save(user);
-        User userTest = userRepository.findById(user.getId()).get();
-        assertThat(userTest.getUsername()).isNull();
     }
 
 }

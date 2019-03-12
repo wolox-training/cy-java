@@ -180,11 +180,18 @@ public class BookRepositoryTest {
         Book bookTest = bookRepository.findById(100L).get();
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void notCreateTest() {
         Book book = new Book();
+        book.setGenre("Comedy Test");
+        book.setAuthor(null);
+        book.setImage(null);
+        book.setTitle("The Title test");
+        book.setSubtitle("JustTestSub");
+        book.setPublisher("TestPublisher");
+        book.setYear("2019");
+        book.setPages(100);
+        book.setIsbn("AV100Test");
         bookRepository.save(book);
-        Book bookTest = bookRepository.findById(book.getId()).get();
-        assertThat(bookTest.getAuthor()).isNull();
     }
 }
