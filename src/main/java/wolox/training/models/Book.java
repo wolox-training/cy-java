@@ -2,9 +2,8 @@ package wolox.training.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,7 +64,7 @@ public class Book {
 
     @ManyToMany(mappedBy = "books")
     @JsonIgnore
-    private Collection<User> users = new HashSet<>();
+    private List<User> users = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -163,8 +162,8 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Collection<User> getUsers() {
-        return Collections.unmodifiableCollection(users);
+    public List<User> getUsers() {
+        return (List<User>) Collections.unmodifiableCollection(users);
     }
 
     public void setUsers(List<User> users) {
