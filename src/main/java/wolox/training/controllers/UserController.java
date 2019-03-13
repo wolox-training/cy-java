@@ -36,11 +36,6 @@ public class UserController {
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping
-    public Iterable findAll() {
-        return userRepository.findAll();
-    }
-
     @GetMapping("/{id}")
     public User findOne(@PathVariable Long id) {
         return userRepository.findById(id)
