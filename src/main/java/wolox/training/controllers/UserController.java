@@ -2,8 +2,9 @@ package wolox.training.controllers;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -99,13 +100,26 @@ public class UserController {
     }
 
     @GetMapping("/matcheencomplex")
-    public List<User> findByBirthdateBetweenAndUsernameContainingIgnoreCase(
+    public Page<User> findByBirthdateBetweenAndUsernameContainingIgnoreCase(
         @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
         @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
-        @RequestParam(name = "username", defaultValue = "") String username) {
+        @RequestParam(name = "username", defaultValue = "") String username,
+        Pageable pageable) {
 
         return userRepository
-            .findByBirthdateBetweenAndUsernameContainingIgnoreCase(startDate, endDate, username);
+            .findByBirthdateBetweenAndUsernameContainingIgnoreCase(startDate, endDate, username,
+                pageable);
     }
 
+    @GetMapping
+    public Page<User> getAll(
+        @RequestParam(value = "username", defaultValue = "") String username,
+        @RequestParam(value = "name", defaultValue = "") String name,
+        @RequestParam(value = "birthdate", required = false) LocalDate birthdate,
+        Pageable pageable) {
+
+        Page<User> users = userRepository.getAll(username, name, birthdate, pageable);
+
+        return users;
+    }
 }

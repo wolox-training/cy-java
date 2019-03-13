@@ -1,7 +1,8 @@
 package wolox.training.controllers;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -90,15 +91,35 @@ public class BookController {
     }
 
     @GetMapping("/matcheencomplex")
-    public List<Book> findByPublisherAndGenreAndYear(
+    public Page<Book> findByPublisherAndGenreAndYear(
         @RequestParam("publisher") String publisher,
         @RequestParam("genre") String genre,
-        @RequestParam("year") String year) {
+        @RequestParam("year") String year,
+        Pageable pageable) {
 
-        List<Book> books = bookRepository.findByPublisherAndGenreAndYear(publisher, genre, year);
+        Page<Book> books = bookRepository
+            .findByPublisherAndGenreAndYear(publisher, genre, year, pageable);
 
         return books;
     }
 
+    @GetMapping
+    public Page<Book> getAll(
+        @RequestParam(value = "genre", defaultValue = "") String genre,
+        @RequestParam(value = "author", defaultValue = "") String author,
+        @RequestParam(value = "image", defaultValue = "") String image,
+        @RequestParam(value = "title", defaultValue = "") String title,
+        @RequestParam(value = "subtitle", defaultValue = "") String subtitle,
+        @RequestParam(value = "publisher", defaultValue = "") String publisher,
+        @RequestParam(value = "year", defaultValue = "") String year,
+        @RequestParam(value = "pages", required = false) Integer pages,
+        @RequestParam(value = "isbn", defaultValue = "") String isbn,
+        Pageable pageable) {
+
+        Page<Book> books = bookRepository.getAll(genre, author, image, title, subtitle,
+            publisher, year, pages, isbn, pageable);
+
+        return books;
+    }
 }
 
