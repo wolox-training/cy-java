@@ -34,11 +34,6 @@ public class BookController {
         return "greeting";
     }
 
-    @GetMapping
-    public Iterable findAll() {
-        return bookRepository.findAll();
-    }
-
     @GetMapping("/{id}")
     public Book findOne(@PathVariable Long id) {
         return bookRepository.findById(id)
@@ -100,16 +95,16 @@ public class BookController {
         return books;
     }
 
-    @GetMapping("/getall")
+    @GetMapping
     public List<Book> getAll(
-        @RequestParam(value = "genre", defaultValue = "Scary") String genre,
-        @RequestParam(value = "author", defaultValue = "Cristian") String author,
-        @RequestParam(value = "image", defaultValue = "Scary.jpg") String image,
-        @RequestParam(value = "title", defaultValue = "Scary Movie") String title,
-        @RequestParam(value = "subtitle", defaultValue = "Scary Movie 2") String subtitle,
+        @RequestParam(value = "genre", defaultValue = "") String genre,
+        @RequestParam(value = "author", defaultValue = "") String author,
+        @RequestParam(value = "image", defaultValue = "") String image,
+        @RequestParam(value = "title", defaultValue = "") String title,
+        @RequestParam(value = "subtitle", defaultValue = "") String subtitle,
         @RequestParam("publisher") String publisher,
-        @RequestParam(value = "year", defaultValue = "2019") String year,
-        @RequestParam(value = "pages", defaultValue = "1") Integer pages,
+        @RequestParam(value = "year", defaultValue = "") String year,
+        @RequestParam(value = "pages") Integer pages,
         @RequestParam("isbn") String isbn) {
 
         List<Book> books = bookRepository.getAll(genre, author, image, title, subtitle,
