@@ -35,11 +35,6 @@ public class BookController {
         return "greeting";
     }
 
-    @GetMapping
-    public Iterable findAll() {
-        return bookRepository.findAll();
-    }
-
     @GetMapping("/{id}")
     public Book findOne(@PathVariable Long id) {
         return bookRepository.findById(id)
