@@ -35,11 +35,6 @@ public class UserController {
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping
-    public Iterable findAll() {
-        return userRepository.findAll();
-    }
-
     @GetMapping("/{id}")
     public User findOne(@PathVariable Long id) {
         return userRepository.findById(id)
@@ -106,6 +101,17 @@ public class UserController {
 
         return userRepository
             .findByBirthdateBetweenAndUsernameContainingIgnoreCase(startDate, endDate, username);
+    }
+
+    @GetMapping
+    public List<User> getAll(
+        @RequestParam(value = "username", defaultValue = "") String username,
+        @RequestParam(value = "name", defaultValue = "") String name,
+        @RequestParam(value = "birthdate", required = false) LocalDate birthdate) {
+
+        List<User> users = userRepository.getAll(username, name, birthdate);
+
+        return users;
     }
 
 }

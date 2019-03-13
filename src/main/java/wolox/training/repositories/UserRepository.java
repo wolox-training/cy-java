@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import wolox.training.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
     User findByUsername(String username);
 
     @Query(
@@ -14,4 +15,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             + "AND (u.username = :username OR u.username IS NULL)")
     List<User> findByBirthdateBetweenAndUsernameContainingIgnoreCase(LocalDate startDate,
         LocalDate endDate, String username);
+
+    @Query(
+        "SELECT u FROM User u WHERE (u.username LIKE %:username% OR u.username IS NULL) AND (u.name LIKE %:name% OR u.name IS NULL) "
+            +
+            "AND (u.birthdate = :birthdate OR u.birthdate IS NULL)")
+    List<User> getAll(String username, String name, LocalDate birthdate);
 }

@@ -34,11 +34,6 @@ public class BookController {
         return "greeting";
     }
 
-    @GetMapping
-    public Iterable findAll() {
-        return bookRepository.findAll();
-    }
-
     @GetMapping("/{id}")
     public Book findOne(@PathVariable Long id) {
         return bookRepository.findById(id)
@@ -100,5 +95,22 @@ public class BookController {
         return books;
     }
 
-}
+    @GetMapping
+    public List<Book> getAll(
+        @RequestParam(value = "genre", defaultValue = "") String genre,
+        @RequestParam(value = "author", defaultValue = "") String author,
+        @RequestParam(value = "image", defaultValue = "") String image,
+        @RequestParam(value = "title", defaultValue = "") String title,
+        @RequestParam(value = "subtitle", defaultValue = "") String subtitle,
+        @RequestParam(value = "publisher", defaultValue = "") String publisher,
+        @RequestParam(value = "year", defaultValue = "") String year,
+        @RequestParam(value = "pages", required = false) Integer pages,
+        @RequestParam(value = "isbn", defaultValue = "") String isbn) {
 
+        List<Book> books = bookRepository.getAll(genre, author, image, title, subtitle,
+            publisher, year, pages, isbn);
+
+        return books;
+    }
+
+}
