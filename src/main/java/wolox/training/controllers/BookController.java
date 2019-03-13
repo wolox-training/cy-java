@@ -100,5 +100,22 @@ public class BookController {
         return books;
     }
 
-}
+    @GetMapping("/getall")
+    public List<Book> getAll(
+        @RequestParam(value = "genre", defaultValue = "Scary") String genre,
+        @RequestParam(value = "author", defaultValue = "Cristian") String author,
+        @RequestParam(value = "image", defaultValue = "Scary.jpg") String image,
+        @RequestParam(value = "title", defaultValue = "Scary Movie") String title,
+        @RequestParam(value = "subtitle", defaultValue = "Scary Movie 2") String subtitle,
+        @RequestParam("publisher") String publisher,
+        @RequestParam(value = "year", defaultValue = "2019") String year,
+        @RequestParam(value = "pages", defaultValue = "1") Integer pages,
+        @RequestParam("isbn") String isbn) {
 
+        List<Book> books = bookRepository.getAll(genre, author, image, title, subtitle,
+            publisher, year, pages, isbn);
+
+        return books;
+    }
+
+}

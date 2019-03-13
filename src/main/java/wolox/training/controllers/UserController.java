@@ -108,4 +108,15 @@ public class UserController {
             .findByBirthdateBetweenAndUsernameContainingIgnoreCase(startDate, endDate, username);
     }
 
+    @GetMapping("/getall")
+    public List<User> getAll(
+        @RequestParam(value = "username", defaultValue = "Scary") String username,
+        @RequestParam(value = "name", defaultValue = "Cristian") String name,
+        @RequestParam(value = "birthdate") LocalDate birthdate) {
+
+        List<User> users = userRepository.getAll(username, name, birthdate);
+
+        return users;
+    }
+
 }
