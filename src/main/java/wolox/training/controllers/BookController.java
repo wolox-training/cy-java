@@ -102,10 +102,10 @@ public class BookController {
         @RequestParam(value = "image", defaultValue = "") String image,
         @RequestParam(value = "title", defaultValue = "") String title,
         @RequestParam(value = "subtitle", defaultValue = "") String subtitle,
-        @RequestParam("publisher") String publisher,
+        @RequestParam(value = "publisher", defaultValue = "") String publisher,
         @RequestParam(value = "year", defaultValue = "") String year,
-        @RequestParam(value = "pages") Integer pages,
-        @RequestParam("isbn") String isbn) {
+        @RequestParam(value = "pages", required = false) Integer pages,
+        @RequestParam(value = "isbn", defaultValue = "") String isbn) {
 
         List<Book> books = bookRepository.getAll(genre, author, image, title, subtitle,
             publisher, year, pages, isbn);

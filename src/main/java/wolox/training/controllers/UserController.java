@@ -107,7 +107,7 @@ public class UserController {
     public List<User> getAll(
         @RequestParam(value = "username", defaultValue = "") String username,
         @RequestParam(value = "name", defaultValue = "") String name,
-        @RequestParam(value = "birthdate") LocalDate birthdate) {
+        @RequestParam(value = "birthdate", required = false) LocalDate birthdate) {
 
         List<User> users = userRepository.getAll(username, name, birthdate);
 
