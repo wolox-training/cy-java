@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn-password-user
+      author: cristianYanza
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: password
+                  type: varchar(255)
+  - changeSet:
+      id: addColumn-user-id-store
+      author: cristianYanza
+      changes:
+        - addColumn:
+            schemaName: public
+            tableName: store
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    - nullable: false
+                    - foreignKeyName: fk_store_user
+                    - references: users(id)
+  - changeSet:
+      id: renameColumn-store
+      author: cristianYanza
+      changes:
+        - renameColumn:
+            columnDataType: varchar
+            newColumnName: name_store
+            oldColumnName: name
+            remarks: A String
+            schemaName: public
+            tableName: store
