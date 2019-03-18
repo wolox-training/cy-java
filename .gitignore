@@ -4,3 +4,6 @@ out
 gradle/.DS_Store
 .DS_Store
 .gradle
+training.properties
+training.xml
+src/main/resources/db/changelog/liquibase.properties
