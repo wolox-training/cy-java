@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import wolox.training.models.User;
 import wolox.training.repositories.UserRepository;
@@ -30,13 +28,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
         User user = userRepository.findByUsername(name);
-        if(user == null || !user.validatePassword(password)) {
-            throw new BadCredentialsException("Invalid credentials");
-        }else {
+//        if(user == null || !user.validatePassword(password)) {
+//            throw new BadCredentialsException("Invalid credentials");
+//        }else {
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-            grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
+//            grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
             return new UsernamePasswordAuthenticationToken(name, password, grantedAuthorities);
-        }
+//        }
     }
 
     @Override

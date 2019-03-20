@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import wolox.training.models.Book;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
@@ -28,6 +29,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             "AND (b.year LIKE %:year% OR b.year IS NULL) AND (b.pages = :pages OR b.pages IS NULL)"
             +
             "AND (b.isbn LIKE %:isbn% OR b.isbn IS NULL)")
-    Page<Book> getAll(String genre, String author, String image, String title, String subtitle,
-        String publisher, String year, Integer pages, String isbn, Pageable pageable);
+    Page<Book> getAll(@Param("genre") String genre, @Param("author") String author,
+        @Param("image") String image, @Param("title") String title,
+        @Param("subtitle") String subtitle,
+        @Param("publisher") String publisher, @Param("year") String year,
+        @Param("pages") Integer pages, @Param("isbn") String isbn,
+        Pageable pageable);
 }
