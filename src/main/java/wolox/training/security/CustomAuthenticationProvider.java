@@ -30,9 +30,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
         User user = userRepository.findByUsername(name);
-        if(user == null || !user.validatePassword(password)) {
+        if (user == null || !user.validatePassword(password)) {
             throw new BadCredentialsException("Invalid credentials");
-        }else {
+        } else {
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
             grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
             return new UsernamePasswordAuthenticationToken(name, password, grantedAuthorities);

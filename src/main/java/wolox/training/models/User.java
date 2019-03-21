@@ -46,7 +46,7 @@ public class User {
     @Column(nullable = false)
     private LocalDate birthdate;
 
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnore
     private List<Book> books = new ArrayList<>();
 
@@ -116,20 +116,20 @@ public class User {
         this.role = role;
     }
 
-    public boolean addBookToUser(Book newBook) {
+    public void addBookToUser(Book newBook) {
         Boolean book = books.stream().anyMatch(b -> b.equals(newBook));
         if (book) {
             throw new BookAlreadyOwnedException("Book id mismatch");
-        }else {
-            return books.add(newBook);
+        } else {
+            books.add(newBook);
         }
     }
 
     public void deleteBookFromUser(Book deleteBook) {
         Boolean book = books.stream().anyMatch(b -> b.equals(deleteBook));
-        if(book) {
+        if (book) {
             books.remove(deleteBook);
-        }else {
+        } else {
             throw new BookNotFoundException("Book not found");
         }
     }
