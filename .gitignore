@@ -7,3 +7,5 @@ gradle/.DS_Store
 training.properties
 training.xml
 src/main/resources/db/changelog/liquibase.properties
+
+

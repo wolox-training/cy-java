@@ -22,18 +22,31 @@ package wolox.training.controllers;
 //import wolox.training.repositories.BookRepository;
 //import wolox.training.utils.Utils;
 
-//@RunWith(SpringRunner.class)
-//@WebMvcTest(BookController.class)
+import org.junit.Test;
+import org.springframework.test.web.reactive.server.WebTestClient;
+
+
 public class BookControllerTest {
-//    @Autowired
-//    private MockMvc mvc;
-//
-//    @MockBean
+
+    private WebTestClient webTestClient;
+
+    //    @MockBean
 //    private BookRepository bookRepository;
 //
 //    @MockBean
 //    private Book book;
 //
+    @Test
+    public void testFindAll() {
+        Book
+        webTestClient.get().uri("/api/books/")
+            //.accept(MediaType.APPLICATION_JSON_UTF8)
+            .exchange()
+            .expectStatus().isOk();
+        //.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+        //.expectBodyList(Message.class);
+        int i = 0;
+    }
 //    @Test
 //    public void findAllTest() throws Exception {
 //        Book book = new Book();

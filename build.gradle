@@ -47,4 +47,8 @@ dependencies {
 	compile('com.ibm.reactivecomponents:reactive-jpa:0.0.1-SNAPSHOT')
 	compile("org.springframework:spring-jdbc")
 	compile 'io.reactiverse:reactive-pg-client:0.11.2'
+	testCompile 'io.projectreactor:reactor-test'
+	compile group: 'io.projectreactor.ipc', name: 'reactor-netty', version: '0.7.6.RELEASE'
+	compile group: 'org.springframework', name: 'spring-webflux', version: '5.0.5.RELEASE'
+	compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
 }

@@ -1,22 +1,21 @@
 package wolox.training.repositories;
 
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRepositoryTest {
+
 //    @Autowired
-//    private UserRepository userRepository;
-
-    @Autowired
-    private TestEntityManager entityManager;
-
+//    private UserRepositoryTest userRepository;
+//
+//    @Autowired
+//    private TestEntityManager entityManager;
+//
 //    @Test
 //    public void findByUsernameTest() {
 //        User user = new User();
@@ -27,7 +26,7 @@ public class UserRepositoryTest {
 //        User userTest = userRepository.findByUsername(user.getUsername());
 //        assertThat(user.getUsername()).isEqualTo(userTest.getUsername());
 //    }
-
+//
 //    @Test
 //    public void findAllTest() {
 //        User user1 = new User();
@@ -44,7 +43,7 @@ public class UserRepositoryTest {
 //        users.add(user1);
 //        users.add(user2);
 //
-//        for(User user : users) {
+//        for (User user : users) {
 //            entityManager.persistAndFlush(user);
 //        }
 //

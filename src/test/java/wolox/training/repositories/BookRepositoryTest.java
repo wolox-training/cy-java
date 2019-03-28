@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class BookRepositoryTest {
 
 //    @Autowired
-//    private BookRepository bookRepository;
+//    private BookRepositoryTest bookRepository;
 //
 //    @Autowired
 //    private TestEntityManager entityManager;
@@ -80,7 +80,7 @@ public class BookRepositoryTest {
 //        books.add(book1);
 //        books.add(book2);
 //
-//        for(Book book : books) {
+//        for (Book book : books) {
 //            entityManager.persistAndFlush(book);
 //        }
 //
